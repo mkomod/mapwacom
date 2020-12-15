@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Maps the stylus to a single monitor
+#
+# Tries to map to external monitor first, if no external monitor
+# is connected then maps to internal monitor
+#
+
+STYLUS_ID=$(xsetwacom --list | grep -Po '\d*(?=.*type:.*STYLUS)')
+MONITOR=$(xrandr --listactivemonitors | tail -1 | grep -o "\w*$")
+
+xsetwacom --set $STYLUS_ID MapToOutput $MONITOR
+
