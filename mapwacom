@@ -7,7 +7,7 @@
 #
 
 STYLUS_ID=$(xsetwacom --list | grep -Po '\d*(?=.*type:.*STYLUS)')
-MONITOR=$(xrandr --listactivemonitors | tail -1 | grep -o "\w*$")
+MONITOR=$(xrandr | grep " connected" | tail -1 | cut -d " " -f 1)
 
 xsetwacom --set $STYLUS_ID MapToOutput $MONITOR
 
